@@ -52,8 +52,56 @@ class EmpresaController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+      
+
+
+       $request->validate([
+        'pais' => 'required',
+        'nombre_empresa',
+
+        'tipo_empresa'=>'required',
+        'nit'=>'required',
+        'telefono'=>'required',
+        'email'=>'required',
+        'cantidad_impuesto'=>'required',
+        'nombre_impuesto'=>'required',
+        'moneda'=>'required',
+        'direccion'=>'required',
+        'ciudad' => 'required',
+        'departamento' => 'required',
+        'codigo_postal'=>'required',
+        'logo'=>'required',
+    ]);
+      $empresa = new Empresa();
+      $empresa->pais = $request->pais;
+      $empresa->tipo_empresa = $request->tipo_empresa;
+      $empresa->nit = $request->nit;
+      $empresa->telefono = $request->telefono;
+      $empresa->email = $request->email;
+      $empresa->cantidad_impuesto = $request->cantidad_impuesto;
+      $empresa->nombre_impuesto = $request->nombre_impuesto;
+      $empresa->modena = $request->modena;
+      $empresa->direccion = $request->direccion;
+      $empresa->ciudad = $request->ciudad;
+      $empresa->departamento = $request->departamento;
+      $empresa->codigo_postal = $request->codigo_postal;
+      $empresa->logo = $request->logo;
+      $empresa->save();
+      
+      $usuario= new User();
+      $usuario->name='Admin';
+      $usuario->email=$request->email;
+      $usuario->password = Hash::make($request['nit']);
+      $usuario->empresa_id=$empresa->id;
+      $usuario->save();
+
+
+        return redirect()->route('admin.index');
+            
+       
+
+
+}
 
     /**
      * Display the specified resource.

@@ -37,12 +37,13 @@
    
     {{-- Card Body --}}
     <div class="card-body {{ $auth_type ?? 'login' }}-card-body {{ config('adminlte.classes_auth_body', '') }}">
-      <form action="">
+      <form action="{{url('crear-empresa/create')}}"method="post" enctype="multipart/form-data"> 
+        @csrf
         <div class="row">
             <div class="col-md-3">
                <div class="form-group">
                 <label for="logo">logo</label>
-                <input type="file" id="file" name="logo" class="form-control">
+                <input type="file" id="file" name="logo"  accept = ".jpg, .jppeg, .png"class="form-control" required>
                 <br>
                 <center><output id="list"></output></center>
                 <script>
@@ -103,7 +104,11 @@
                     <div class="form-group">
 
                         <label for="nombre_empresa">Nombre de la Empresa</label>
-                     <input type="text" class="form-control">
+                     <input type="text" name= 'nombre-empresa'class="form-control" >
+                     @error('nombre_empresa')
+                     <small style="color: red;">{{$message}}"</small>
+                         
+                     @enderror
 
             
 
@@ -115,7 +120,7 @@
                     <div class="form-group">
 
                         <label for="nombre_empresa">Tipo  de la Empresa</label>
-                     <input type="text" class="form-control">
+                     <input type="text" nombre='tipo_empresa'class="form-control" required>
                  </div>
                 </div>
                </div>
@@ -124,7 +129,7 @@
                     <div class="form-group">
 
                         <label for="nit">Nit</label>
-                     <input type="text" class='form-control'>
+                     <input type="text" name="nit" class='form-control'>
                    
                     </div>
                 </div>
@@ -132,7 +137,7 @@
                     <div class="form-group">
 
                         <label for="telefono">Telefonos de la Empresa</label>
-                     <input type="text" class="form-control">
+                     <input type="text" name= 'telefono'class="form-control" required>
 
             
 
@@ -144,7 +149,7 @@
                     <div class="form-group">
 
                         <label for="email">Email de la Empresa</label>
-                     <input type="email" class="form-control">
+                     <input type="email" name='email'  class="form-control">
                  </div>
                 </div>
                </div>
@@ -154,7 +159,7 @@
                     <div class="form-group">
 
                         <label for="cantidad_impuesto">Cantidad de Impuesto</label>
-                     <input type="number" class='form-control'>
+                     <input type="number" name="cantidad_impuesto" class='form-control'>
                    
                     </div>
                 </div>
@@ -162,7 +167,7 @@
                     <div class="form-group">
 
                         <label for="nombre_impuesto">Nombre del Impuesto</label>
-                     <input type="text" class="form-control">
+                     <input type="text" name ='cantidad_impuesto' class="form-control">
 
             
 
@@ -174,7 +179,7 @@
                     <div class="form-group">
 
                         <label for="moneda">Moneda</label>
-                        <select name="" id="" class="form-control">
+                        <select name="moneda" id="" class="form-control">
                             @foreach($monedas as $moneda) 
                            <option value="{{$moneda->symbol}}">{{$moneda->symbol}}</option>
                             @endforeach
@@ -184,8 +189,8 @@
                 </div>
                </div>
 
-               <hr>
                
+
 
                   <div class="row">
                 <div class="col-md-4">
@@ -202,7 +207,7 @@
                     <div class="form-group">
 
                         <label for="ciudad">Ciudad</label>
-                        <select name="" id="" class="form-control">
+                        <div id='respuesta_estado'>
                            
                          </select>
 
@@ -226,7 +231,14 @@
                 
                </div>
                 
+              <hr>
+              <div class="row">
+                <div class="col-md-12">
+                <button type="submit" class="btn btn-lg btn-primary ">crear empresa</button>
+
+
             </div>
+
         </div>
       </form>
     </div>
