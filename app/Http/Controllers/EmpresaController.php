@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Empresa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
+use App\Models\User;       
+use Illuminate\Support\Facades\Hash;   
+use Illuminate\Support\Facades\Auth;
+
 
 class EmpresaController extends Controller
 
@@ -95,9 +98,10 @@ class EmpresaController extends Controller
       $usuario->empresa_id=$empresa->id;
       $usuario->save();
 
+ 
+    Auth::login($usuario);
+ return redirect()->route('empresas.index')->with('message', 'Se registró la empresa de manera correcta.');
 
-        return redirect()->route('admin.index');
-            
        
 
 

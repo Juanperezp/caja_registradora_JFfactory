@@ -11,7 +11,7 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/admin', [App\Http\Controllers\AdminController::class, 'index'])->name('admin.index');
+Route::get('/admin', [App\Http\Controllers\AdminController::class, 'index'])->name('admin.index')->middleware('auth');
 
 Route::get('/crear-empresa', [App\Http\Controllers\EmpresaController::class, 'create'])->name('admin.empresas.create');
 Route::get('/caja_registradora_JFfactory', [EmpresaController::class, 'index']);
